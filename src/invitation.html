@@ -5,22 +5,143 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hello baby!</title>
+    <script src="script.js" defer></script>
+    <style>
+      /* ANIMATION: PAGE FADE-IN */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      body {
+        animation: fadeIn 1.5s ease-in-out;
+      }
+
+      /* ANIMATION: ENVELOPE OPEN */
+      @keyframes open-flap {
+        from {
+          transform: rotateX(0deg);
+        }
+        to {
+          transform: rotateX(180deg);
+        }
+      }
+      .envelope.open .envelope-flap {
+        animation: open-flap 0.6s forwards;
+      }
+
+      /* ANIMATION: ENVELOPE CLOSE */
+      @keyframes close-flap {
+        from {
+          transform: rotateX(180deg);
+        }
+        to {
+          transform: rotateX(0deg);
+        }
+      }
+      .envelope .envelope-flap {
+        animation: close-flap 0.6s forwards;
+      }
+    </style>
   </head>
-  <body class="flex flex-col font-playfair">
-    <div
-      class="flex flex-col justify-center items-center h-screen text-white bg-gray-600 bg-[url('./images/melanie-magdalena-KpBAYMNf9Tw-unsplash.jpg')] bg-blend-multiply bg-center bg-cover bg-no-repeat bg-local"
+  <body class="flex flex-col font-playfair transition-discrete">
+    <!-- AUDIO: BACKGROUND MUSIC -->
+    <audio id="backgroundAudio" loop autoplay>
+      <source src="./audio/rapunzelThemeSong.mp3" type="audio/mpeg" />
+    </audio>
+
+    <!-- UI: AUDIO CONTROL BUTTON -->
+    <button
+      id="audioControl"
+      class="fixed top-5 left-5 z-50 bg-black/40 p-2 rounded-full text-white hover:bg-black/60 transition-colors"
     >
-      <h1 class="text-6xl m-10 font-playfair">Ms. Denise David</h1>
-      <p class="text-2xl text-center font-playfair">
+      <svg
+        id="soundOnIcon"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-6 h-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z"
+        />
+      </svg>
+      <svg
+        id="soundOffIcon"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-6 h-6 hidden"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M17.25 9.75L19.5 12m0 0l2.25 2.25M19.5 12l-2.25 2.25M19.5 12l2.25-2.25M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z"
+        />
+      </svg>
+    </button>
+    <div
+      class="flex flex-col justify-center items-center h-screen text-white bg-gray-600 bg-[url('./images/melanie-magdalena-KpBAYMNf9Tw-unsplash.jpg')] bg-blend-multiply bg-center bg-cover bg-no-repeat bg-local z-10 p-4"
+    >
+      <div class="leading-normal tracking-normal">
+        <video
+          autoplay
+          loop
+          muted
+          class="absolute top-0 left-0 w-full h-full object-cover z-0 opacity-20"
+        >
+          <source src="./videos/rapunzel2.mp4" type="video/mp4" />
+        </video>
+      </div>
+
+      <h1 class="text-4xl md:text-6xl m-10 font-playfair z-20 text-center">
+        Ms. Denise David
+      </h1>
+      <p class="text-lg md:text-2xl text-center font-playfair z-20">
         You are cordially invited to the celebration of your 3rd dating
         anniversary <br />
         with Mr. Austin Reyes on October 30, 2025 @ 6:00PM.
       </p>
+
+      <!-- UI: SCROLL ARROW -->
+      <div
+        id="scrollArrow"
+        class="absolute bottom-10 animate-bounce transition-opacity duration-500"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          class="w-12 h-12 text-white"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3"
+          />
+        </svg>
+      </div>
     </div>
-    <div class="h-130 bg-amber-100 text-black flex">
-      <div class="flex flex-col items-center-safe m-10 ml-55 mt-40">
-        <h2 class="text-6xl mb-3 text-left">Where?</h2>
-        <h3 class="text-left text-2xl">
+
+    <div
+      class="bg-amber-100 text-black flex flex-col md:flex-row p-4 md:p-0 md:h-130"
+    >
+      <div
+        class="flex flex-col justify-center items-center md:items-start w-full md:w-1/2 p-4 md:pl-20 lg:pl-55 text-center md:text-left"
+      >
+        <h2 class="text-4xl md:text-6xl mb-3">Where?</h2>
+        <h3 class="text-xl md:text-2xl">
           <a
             class="underline"
             href="https://www.tripadvisor.com.ph/Restaurant_Review-g298455-d9598802-Reviews-Rainforest_Kitchen_By_Chef_Vince_Garcia-San_Fernando_Pampanga_Province_Central_Lu.html"
@@ -30,56 +151,168 @@
           by Chef Vince Garcia<br />
           San Fernando, Pampanga
         </h3>
-        <div class="flex flex-row items-start w-55 mr-55">
+        <div class="flex flex-row items-start mt-4">
           <button
-            class="m-1 mt-2 p-2 rounded-4xl bg-amber-500 hover:scale-105 transition-transform ease-in-out duration-300"
+            class="m-1 mt-2 p-2 rounded-full md:rounded-4xl bg-amber-500 hover:scale-105 transition-transform ease-in-out duration-300 text-sm md:text-base"
           >
             Italian
           </button>
           <button
-            class="m-1 mt-2 p-2 rounded-4xl bg-amber-500 hover:scale-105 transition-transform ease-in-out duration-300"
+            class="m-1 mt-2 p-2 rounded-full md:rounded-4xl bg-amber-500 hover:scale-105 transition-transform ease-in-out duration-300 text-sm md:text-base"
           >
             Western
           </button>
         </div>
       </div>
       <div
-        class="flex ml-2 mr-15 mask-[url(./images/scribble.png)] bg-[url(./images/rainforest.jpg)] bg-center bg-cover bg- mask-no-repeat mask-auto mask-center w-180 h-125"
+        class="flex w-full md:w-1/2 h-64 md:h-auto my-4 md:my-0 md:mr-15 mask-[url(./images/scribble.png)] bg-[url(./images/rainforest.jpg)] bg-center bg-cover bg- mask-no-repeat mask-auto mask-center"
       ></div>
     </div>
-    <div class="h-150 flex flex-row bg-black text-white">
-      <div class="flex w-[40%] h-[100%] items-center justify-center">
-        <h1 class="text-6xl">Color Palette</h1>
+    <div
+      class="h-auto md:h-150 flex flex-col md:flex-row bg-black text-white p-8 md:p-0"
+    >
+      <div
+        class="flex w-full md:w-[40%] h-full items-center justify-center py-8 md:py-0"
+      >
+        <h1 class="text-4xl md:text-6xl">Color Palette</h1>
       </div>
-      <div class="flex flex-row justify-evenly items-center w-[60%] h-[100%]">
+      <div
+        class="flex flex-row justify-evenly items-center w-full md:w-[60%] h-full"
+      >
         <div
-          class="flex justify-center items-center bg-blue-950 w-50 h-50 rounded-full group hover:scale-105 transition-transform ease-in-out duration-300"
+          class="flex justify-center items-center bg-blue-950 w-24 h-24 md:w-40 md:h-40 lg:w-50 lg:h-50 rounded-full group hover:scale-105 transition-transform ease-in-out duration-300"
         >
           <p
-            class="flex opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            class="flex opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm md:text-2xl"
           >
             #162456
           </p>
         </div>
         <div
-          class="flex justify-center items-center bg-blue-500 w-50 h-50 rounded-full group hover:scale-105 transition-transform ease-in-out duration-300"
+          class="flex justify-center items-center bg-blue-500 w-24 h-24 md:w-40 md:h-40 lg:w-50 lg:h-50 rounded-full group hover:scale-105 transition-transform ease-in-out duration-300"
         >
           <p
-            class="flex opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            class="flex opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm md:text-2xl"
           >
             #3B82F6
           </p>
         </div>
         <div
-          class="flex justify-center items-center bg-gray-200 w-50 h-50 rounded-full group hover:scale-105 transition-transform ease-in-out duration-300"
+          class="flex justify-center items-center bg-gray-200 w-24 h-24 md:w-40 md:h-40 lg:w-50 lg:h-50 rounded-full group hover:scale-105 transition-transform ease-in-out duration-300"
         >
           <p
-            class="text-black opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            class="text-black opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm md:text-2xl"
           >
             #E5E7EB
           </p>
         </div>
       </div>
     </div>
+    <div
+      class="min-h-screen bg-amber-50 flex flex-col justify-center items-center py-20 relative p-4"
+    >
+      <div class="leading-normal tracking-normal">
+        <video
+          autoplay
+          loop
+          muted
+          class="absolute top-0 left-0 w-full h-full object-cover z-0 opacity-30"
+        >
+          <source src="./videos/rapunzel1.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <h2
+        class="text-4xl md:text-6xl mb-16 text-gray-800 font-playfair text-center"
+      >
+        A Special Message
+      </h2>
+
+      <div
+        class="relative w-full max-w-[300px] md:max-w-[500px] h-[300px] md:h-[500px] flex justify-center items-center"
+      >
+        <!-- INTERACTIVE ELEMENT: ENVELOPE -->
+        <div
+          class="envelope relative w-[300px] h-[180px] md:w-[500px] md:h-[300px] cursor-pointer transition-transform duration-300 hover:-translate-y-1"
+          id="envelope"
+        >
+          <div
+            class="absolute top-0 left-0 z-[15] w-0 h-0 border-l-[150px] md:border-l-[250px] border-l-transparent border-r-[150px] md:border-r-[250px] border-r-transparent border-b-[108px] md:border-b-[180px] border-b-amber-400"
+          ></div>
+          <div
+            class="absolute bottom-0 w-full h-[144px] md:h-[240px] bg-gradient-to-br from-amber-400 to-amber-500 border-4 border-amber-950 rounded-b-xl z-20 shadow-lg"
+          ></div>
+          <div
+            class="envelope-flap absolute top-0 left-0 z-30 drop-shadow-lg origin-top w-0 h-0 border-l-[150px] md:border-l-[250px] border-l-transparent border-r-[150px] md:border-r-[250px] border-r-transparent border-t-[108px] md:border-t-[180px] border-t-amber-700"
+            id="envelopeFlap"
+          ></div>
+        </div>
+
+        <!-- INTERACTIVE ELEMENT: LETTER -->
+        <div
+          class="letter absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 scale-90 w-full max-w-[90vw] md:max-w-[800px] bg-gradient-to-br from-yellow-50 to-amber-50 p-6 md:p-16 rounded border-2 border-amber-300 shadow-2xl opacity-0 transition-all duration-700 ease-in-out z-50 pointer-events-none"
+          id="letter"
+        >
+          <div
+            class="relative z-[1] font-serif flex flex-col text-center md:text-left"
+          >
+            <h3
+              class="text-2xl md:text-4xl mb-5 font-playfair italic text-amber-900 [text-shadow:1px_1px_2px_rgba(0,0,0,0.1)]"
+            >
+              My Dearest Denise,
+            </h3>
+            <p class="text-base md:text-xl leading-relaxed mb-5 text-amber-950">
+              Three years ago, you walked into my life and changed everything.
+              Every moment with you has been a treasure, every laugh a melody,
+              and every day an adventure.
+            </p>
+            <p class="text-base md:text-xl leading-relaxed mb-5 text-amber-950">
+              This special evening is my way of celebrating not just our past,
+              but the beautiful future we're building together.
+            </p>
+            <p class="text-base md:text-xl leading-relaxed mb-8 text-amber-950">
+              Thank you for being my partner, my best friend, and my everything.
+              Do you accept my invitation? Answer below.
+            </p>
+            <p
+              class="text-xl md:text-2xl text-center md:text-right font-playfair italic text-amber-900"
+            >
+              Forever yours,<br />
+              <span class="text-2xl md:text-3xl">Austin</span>
+            </p>
+            <div class="flex-row mt-4 text-center">
+              <button
+                id="yesButton"
+                class="justify-center items-center m-1 rounded-full md:rounded-4xl bg-amber-500 h-12 w-16 md:h-15 md:w-20 cursor-pointer text-sm md:text-base"
+                onclick="yesResponse()"
+              >
+                Yes
+              </button>
+              <button
+                id="noButton"
+                class="justify-center items-center rounded-full md:rounded-4xl bg-amber-500 h-12 w-16 md:h-15 md:w-20 cursor-pointer text-sm md:text-base"
+                onclick="noResponse()"
+              >
+                No
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p
+        class="text-xl text-gray-600 mt-4 cursor-pointer hover:text-gray-800 transition-colors"
+        id="envelopePrompt"
+      >
+        Click the envelope to open
+      </p>
+    </div>
+    <!-- JUMPSCARE VIDEO ELEMENT -->
+    <video
+      id="jumpScare"
+      style="display: none; z-index: 9999"
+      class="h-[100%] w-[100%] fixed top-0"
+    >
+      <source src="./videos/jumpscareFoxy.mp4" type="video/mp4"
+    </video>
   </body>
 </html>

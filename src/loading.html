@@ -1,12 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link href="./output.css" rel="stylesheet" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Loading...</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* ANIMATION: PAGE FADE-IN */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      body {
+        animation: fadeIn 1.5s ease-in-out;
+      }
+      /* ANIMATION: PAGE FADE-OUT */
+      @keyframes fadeOut {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+        }
+      }
+      body.fade-out {
+        animation: fadeOut 1s ease-out forwards;
+      }
+      .font-disney {
+        font-family: "Dancing Script", cursive;
+      }
+    </style>
   </head>
-  <body>
-    
+  <body class="bg-gradient-to-br from-purple-600 to-indigo-900">
+    <div
+      class="flex flex-col items-center justify-center min-h-screen text-white p-4"
+    >
+      <svg
+        class="w-20 h-20 md:w-28 md:h-28 mb-6 text-yellow-300 animate-pulse"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 512 512"
+        fill="currentColor"
+      >
+        <path
+          d="M362.7 19.3L314.3 113.8L410 112.3C425.4 112.3 434 129.5 423.8 141.6L360.7 217.4L403.3 310.4C408.3 324.7 398.3 339.4 384.3 339.4H285.4L256 448L226.6 339.4H127.7C113.7 339.4 103.7 324.7 108.7 310.4L151.3 217.4L98.2 141.6C78 129.5 86.6 112.3 102 112.3H197.7L149.3 19.3C143.2 5.4 156.4 -6.1 169.1 2.8L256 64L342.9 2.8C355.6 -6.1 368.8 5.4 362.7 19.3zM256 208C233.9 208 216 225.9 216 248C216 270.1 233.9 288 256 288C278.1 288 296 270.1 296 248C296 225.9 278.1 208 256 208z"
+        />
+      </svg>
+
+      <h1
+        class="text-3xl md:text-4xl text-yellow-100 font-disney animate-pulse text-center"
+      >
+        Flower, gleam and glow...
+      </h1>
+    </div>
+    <script src="loading.js"></script>
   </body>
 </html>
